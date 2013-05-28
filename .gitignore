@@ -1,0 +1,9 @@
+*.pyc
+.*.swp
+*.log
+*~
+#.#
+build/
+dist/
+MANIFEST
+loggertools.egg-info

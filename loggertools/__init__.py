@@ -23,7 +23,7 @@
 # THE SOFTWARE.
 #
 
-from logstream.py import LogStream
+from logstream import LogStream
 
 __version__ = "0.0.1"
 

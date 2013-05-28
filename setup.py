@@ -33,7 +33,7 @@ from loggertools import __version__
 setup(name = "loggertools",
       version = __version__,
       description = ("A module with simple tools to make some logging"
-                     " cases easier")
+                     " cases easier"),
       long_description = open("README.rst").read(),
       author = "Nick Downs",
       author_email = "nickryand@gmail.com",
