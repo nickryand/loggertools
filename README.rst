@@ -36,7 +36,7 @@ Usage
     proc = subprocess.Popen(["seq", "-w", "1", "10000"],
                             stdout=subprocess.PIPE)
 
-    info_logstream = LogStream(logger, proc.stdout)
+    info_logstream = LogStream(logger, proc.stdout, level=logging.INFO, close_fds=True)
     info_logstream.start()
 
     proc.wait()
