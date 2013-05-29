@@ -39,23 +39,23 @@ class LogStreamError(Exception): pass
 class LogStream(threading.Thread):
     """Simple class that reads lines from a file descriptor and logs them"""
 
-    def __init__(self, logger, stream, level=logging.INFO, close_stream=True):
+    def __init__(self, logger, descriptor, level=logging.INFO, close_fd=True):
         super(LogStream, self).__init__()
 
         self.logger = logger
         self.level = level
-        self.stream = stream
-        self.close_stream = close_stream
+        self.descriptor = descriptor
+        self.close_fd = close_fd
 
         self._handle = None
 
     def run(self):
         # XXX: This should maybe support additional types of reading instead
         #      of just readline()
-        if isinstance(self.stream, int):
-            self._handle = io.open(self.stream, "r")
-        elif hasattr(self.stream, 'readline'):
-            self._handle = self.stream
+        if isinstance(self.descriptor, int):
+            self._handle = io.open(self.descriptor, "r")
+        elif hasattr(self.descriptor, 'readline'):
+            self._handle = self.descriptor
         else:
             raise LogStreamError("Stream needs to be a valid file descriptor"
                                  " or an open file-like handle which supports"
@@ -67,9 +67,8 @@ class LogStream(threading.Thread):
                 break
             self.logger.log(self.level, line.strip())
 
-        if self.close_stream:
+        if self.close_fd:
             self._handle.close()
-
 
 def example():
     logging.basicConfig(level=logging.DEBUG)
